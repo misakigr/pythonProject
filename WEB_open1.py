@@ -1,7 +1,7 @@
 import os
 from urllib.request import urlopen
-from selenium import webdriver
 import re
+
 c = ''
 word = 'raw-tx'
 dirA = 'res/'  # Directory where blk*.dat files are stored
@@ -28,39 +28,14 @@ for i in fList:
         for line in file:
             c = str(line)
             c = re.sub("^\s+|\n|\r|\s+$", '', c)
-            #print(c)
+            # print(c)
 
             htmlfile = urlopen("https://btc.bitaps.com/raw/transaction/%s?format=json" % c, timeout=10)
             htmltext = htmlfile.read().decode('utf-8')
             b = htmltext.partition('raw-tx')[2]
-
             match = re.search(r'(?:\w+\d+\w+)+', b)
-            #print(match[0] if match else 'Not found')
+            # print(match[0] if match else 'Not found')
+
             file = open('trans.txt', 'a')
             file.write(match[0] + '\n')
             file.close()
-
-
-
-
-            # c = '53**53'
-    #         browser = webdriver.Edge()
-    #
-    #         try:
-    #             browser.set_window_size(250, 250)
-    #             browser.set_window_position(900, 900)
-    #             browser.get("https://btc.bitaps.com/raw/transaction/%s?format=json" % c)
-    #
-    #
-    #             browser.find_element_by_xpath('//*[@id="tx-info"]/div/i').click()
-    #             result = browser.find_element_by_xpath('//*[@id="raw-tx"]').text
-    #
-    #             file = open('trans.txt', 'a')
-    #             file.write(result + '\n')
-    #             file.close()
-    #
-    #         finally:
-    #             # browser.close()
-    #             pass
-    #
-    # browser.close()
