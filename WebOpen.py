@@ -1,3 +1,9 @@
+#!/usr/bin/python
+# autor: Misac Igor
+# licese: GPL3
+"""This is the "example" module.
+"""
+
 import os
 from urllib.request import urlopen
 import re
@@ -37,9 +43,9 @@ for i in fList:
             match = re.search(r'(?:\w+\d+\w+)+', b)
             # print(match[0] if match else 'Not found')
 
-            # file = open('trans.txt', 'a')
-            # file.write(match[0] + '\n')
-            # file.close()
+            file = open('trans.txt', 'a')
+            file.write(match[0] + '\n')
+            file.close()
 
             resList = []
             word = '022100'
