@@ -20,6 +20,7 @@ fList = [x for x in fList if (x.endswith('.dat') and x.startswith('blk'))]
 fList.sort()
 # Источник: https://pythonim.ru/list/metod-sort-python)
 
+
 for i in fList:
     nameSrc = i
     nameRes = nameSrc.replace('.dat', '.txt')
@@ -42,9 +43,9 @@ for i in fList:
             match = re.search(r'(?:\w+\d+\w+)+', b)
             # print(match[0] if match else 'Not found')
 
-            file = open('trans.txt', 'a')
-            file.write(match[0] + '\n')
-            file.close()
+            # file = open('trans.txt', 'a')
+            # file.write(match[0] + '\n')
+            # file.close()
 
             resList = []
             word = '022100'
@@ -209,3 +210,6 @@ for i in fList:
                 f.write(z + '\n')
             f.close()
             resList = []
+
+if __name__ == '__main__':
+    pass
