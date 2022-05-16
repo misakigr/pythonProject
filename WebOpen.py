@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # autor: Misac Igor
 # licese: GPL3
 """This is the "example" module.
