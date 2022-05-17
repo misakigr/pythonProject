@@ -5,6 +5,8 @@
 
 import os
 import re
+
+import SelectAdress
 import WebOpen
 
 k = 0
@@ -104,6 +106,18 @@ for i in fList:
                 wallet = WebOpen.Tab(c)
                 #print(wallet)
 
+                f = open('file_wall.txt', 'w')
+                f.write(str(wallet))
+                f.close()
+
+                List = SelectAdress.Sel()
+                #print(List)
+                f = open('Lists.txt', 'a')
+                for L in List:
+                    f.write(L)
+                f.close()
+                List = []
+
 
 
 
@@ -120,3 +134,5 @@ for i in fList:
             f = open(file_name, 'w')
             f.write(str(wallet))
             f.close()
+
+
