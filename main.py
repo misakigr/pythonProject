@@ -5,8 +5,6 @@
 
 import os
 import re
-import RazborDef
-import TabelDef
 import WebOpen
 
 k = 0
@@ -34,10 +32,9 @@ for i in fList:
             c = re.sub("^\s+|\n|\r|\s+$", '', c)
             # print(c)
             match = WebOpen.Match(c)
-            resList = RazborDef.Razb(match)
+            resList = WebOpen.Razb(match)
 
-            wallet = TabelDef.Tab(resList)
-            print(wallet)
+
 
             j += 1
             file_name = 'raz_tranz/list00{}.txt'.format(j)
@@ -45,6 +42,5 @@ for i in fList:
             for z in resList:
                 f.write(z + '\n')
             f.close()
-
 
             resList = []
