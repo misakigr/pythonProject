@@ -153,56 +153,58 @@ def Razb(match):
 
 
 def Tab(c):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(chrome_options=chrome_options)
-    driver.get("https://sagecell.sagemath.org/")
-    phn = driver.find_element_by_xpath('//*[@id="cell"]/div[1]/div[1]/div/div[1]/textarea').send_keys(c)
-    # time.sleep(2)
-    driver.find_element_by_xpath('//*[@id="cell"]/div[1]/button').click()
-    time.sleep(5)
-    result = driver.find_element_by_xpath('// *[ @ id = "cell"] / div[3] / div[1] / div / div[2]').text
-    driver.close()
-    header = result
-    import codecs  # If not installed: "pip3 install codecs"
-    import hashlib
-    bits_hex = hex(int(header))
-    # 0x66d891b5ed7f51e5044be6a7ebe4e2eae32b960f5aa0883f7cc0ce4fd6921e31
-    private_key = bits_hex[2:]
-    PK0 = private_key
-    PK1 = '80' + PK0
-    PK2 = hashlib.sha256(codecs.decode(PK1, 'hex'))
-    PK3 = hashlib.sha256(PK2.digest())
-    checksum = codecs.encode(PK3.digest(), 'hex')[0:8]
-    PK4 = PK1 + str(checksum)[2:10]  # I know it looks wierd
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        driver = webdriver.Chrome(chrome_options=chrome_options)
+        driver.get("https://sagecell.sagemath.org/")
+        phn = driver.find_element_by_xpath('//*[@id="cell"]/div[1]/div[1]/div/div[1]/textarea').send_keys(c)
+        # time.sleep(2)
+        driver.find_element_by_xpath('//*[@id="cell"]/div[1]/button').click()
+        time.sleep(5)
+        result = driver.find_element_by_xpath('// *[ @ id = "cell"] / div[3] / div[1] / div / div[2]').text
+        driver.close()
+        header = result
+        import codecs  # If not installed: "pip3 install codecs"
+        import hashlib
+        bits_hex = hex(int(header))
+        # 0x66d891b5ed7f51e5044be6a7ebe4e2eae32b960f5aa0883f7cc0ce4fd6921e31
+        private_key = bits_hex[2:]
+        PK0 = private_key
+        PK1 = '80' + PK0
+        PK2 = hashlib.sha256(codecs.decode(PK1, 'hex'))
+        PK3 = hashlib.sha256(PK2.digest())
+        checksum = codecs.encode(PK3.digest(), 'hex')[0:8]
+        PK4 = PK1 + str(checksum)[2:10]  # I know it looks wierd
 
-    # Define base58
-    def base58(address_hex):
-        alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-        b58_string = ''
-        # Get the number of leading zeros
-        leading_zeros = len(address_hex) - len(address_hex.lstrip('0'))
-        # Convert hex to decimal
-        address_int = int(address_hex, 16)
-        # Append digits to the start of string
-        while address_int > 0:
-            digit = address_int % 58
-            digit_char = alphabet[digit]
-            b58_string = digit_char + b58_string
-            address_int //= 58
-        # Add ‘1’ for each 2 leading zeros
-        ones = leading_zeros // 2
-        for one in range(ones):
-            b58_string = '1' + b58_string
-        return b58_string
+        # Define base58
+        def base58(address_hex):
+            alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+            b58_string = ''
+            # Get the number of leading zeros
+            leading_zeros = len(address_hex) - len(address_hex.lstrip('0'))
+            # Convert hex to decimal
+            address_int = int(address_hex, 16)
+            # Append digits to the start of string
+            while address_int > 0:
+                digit = address_int % 58
+                digit_char = alphabet[digit]
+                b58_string = digit_char + b58_string
+                address_int //= 58
+            # Add ‘1’ for each 2 leading zeros
+            ones = leading_zeros // 2
+            for one in range(ones):
+                b58_string = '1' + b58_string
+            return b58_string
 
-    WIF = base58(PK4)
-    # print(WIF)
-    from bitcoinaddress import Wallet
-    wallet = Wallet(WIF)
+        WIF = base58(PK4)
+        # print(WIF)
+        from bitcoinaddress import Wallet
+        wallet = Wallet(WIF)
 
-    return wallet
-
+        return wallet
+    except:
+        pass
 
 if __name__ == '__main__':
     print(Match('5439C37C4C6DAD4AD93B1D5598D57F1AACE9D0F68B892236DA903B3F136451A1'))
