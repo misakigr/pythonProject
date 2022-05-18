@@ -5,9 +5,9 @@
 
 import os
 import re
-
 import SelectAdress
 import WebOpen
+
 
 k = 0
 j = 0
@@ -83,11 +83,18 @@ for i in fList:
                 f.close()
 
                 List = SelectAdress.Sel()
+
+
                 f = open('Lists.txt', 'a')
                 for L in List:
                     f.write(L)
                 f.close()
                 List = []
+
+                # Удаление дубликатов строк
+                file = 'Lists.txt'
+                uniqlines = set(open(file, 'r', encoding='utf-8').readlines())
+                gotovo = open(file, 'w', encoding='utf-8').writelines(set(uniqlines))
 
             j += 1
             file_name = 'raz_tranz/list00{}.txt'.format(j)
