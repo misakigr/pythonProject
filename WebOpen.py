@@ -11,14 +11,16 @@ import time
 
 
 def Match(c):
-    htmlfile = urlopen("https://btc.bitaps.com/raw/transaction/%s?format=json" % c, timeout=10)
-    htmltext = htmlfile.read().decode('utf-8')
-    b = htmltext.partition('raw-tx')[2]
-    match = re.search(r'(?:\w+\d+\w+)+', b)
-    match = match[0]
+    try:
+        htmlfile = urlopen("https://btc.bitaps.com/raw/transaction/%s?format=json" % c, timeout=10)
+        htmltext = htmlfile.read().decode('utf-8')
+        b = htmltext.partition('raw-tx')[2]
+        match = re.search(r'(?:\w+\d+\w+)+', b)
+        match = match[0]
 
-    return match
-
+        return match
+    except:
+        pass
 
 def Razb(match):
     resList = []
