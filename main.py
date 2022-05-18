@@ -15,7 +15,6 @@ c = ''
 word = 'raw-tx'
 dirA = 'res/'  # Directory where blk*.dat files are stored
 dirB = 'wal_adr/'  # Directory where to save parsing results
-
 fList = os.listdir(dirA)
 fList = [x for x in fList if (x.endswith('.dat') and x.startswith('blk'))]
 fList.sort()
@@ -35,92 +34,60 @@ for i in fList:
             # print(c)
             match = WebOpen.Match(c)
             resList = WebOpen.Razb(match)
-
             f = open('file_name.txt', 'w')
             for i in resList:
                 f.write(i + '\n')
             f.close()
-
             t = 'file_name.txt'
             i = 1
             with open(t) as file:
                 while i <= 24:
                     exec("x{} = {}".format(i, 'str(file.readline())'))
                     i += 1
-
                 x0 = '00'
                 x00 = ''
-
                 res1 = x1 + x2 + x3 + x4 + x21 + x22 + x10 + x11 + x12 + x0 + x00 + x18 + x19 + x20 + x21 + x22 + x23 + x24
-                # re.sub("^\s+|\n|\r|\s+$", '', res)
                 res1 = res1.replace("\r", "")
                 res1 = res1.replace("\n", "")
-                # print(res1)
-                # print()
-
                 from binascii import unhexlify
                 from hashlib import sha256
 
-                # header = input("Введите длинное число:")
                 res1 = unhexlify(res1)
                 res1 = sha256(sha256(res1).digest()).hexdigest()
-                # print(res1)
-                #
-                # print()
-
                 res = x1 + x2 + x3 + x4 + x0 + x00 + x10 + x11 + x12 + x21 + x22 + x18 + x19 + x20 + x21 + x22 + x23 + x24
                 res = res.replace("\r", "")
                 res = res.replace("\n", "")
-                # print(res)
-                # print()
-
                 res = unhexlify(res)
                 res = sha256(sha256(res).digest()).hexdigest()
-                # print(res)
-                # print()
                 c = ""
                 c1 = 'p  = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141'
-                # print('p  = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141')
                 c = c + c1 + '\n'
                 c2 = 'r  = 0x' + x6
-                # print('r  = 0x' + x6)
                 c = c + c2
                 c3 = 's1 = 0x' + x8
-                # print('s1 = 0x' + x8)
                 c = c + c3
                 c4 = 's2 = 0x' + x16
-                # print('s2 = 0x' + x16)
                 c = c + c4
                 c5 = 'z1 = 0x' + res1 + '\n'
-                # print('z1 = 0x' + res1)
                 c = c + c5
                 c6 = 'z2 = 0x' + res
-                # print('z2 = 0x' + res)
                 c = c + c6 + '\n'
                 c7 = 'K = GF(p)'
-                # print('K = GF(p)')
                 c = c + c7 + '\n'
                 c8 = 'K((z1*s2 - z2*s1)/(r*(s1-s2)))'
-                # print('K((z1*s2 - z2*s1)/(r*(s1-s2)))')
                 c = c + c8
                 wallet = WebOpen.Tab(c)
-                #print(wallet)
 
                 f = open('file_wall.txt', 'w')
                 f.write(str(wallet))
                 f.close()
 
                 List = SelectAdress.Sel()
-                #print(List)
                 f = open('Lists.txt', 'a')
                 for L in List:
                     f.write(L)
                 f.close()
                 List = []
-
-
-
-
 
             j += 1
             file_name = 'raz_tranz/list00{}.txt'.format(j)
@@ -134,5 +101,3 @@ for i in fList:
             f = open(file_name, 'w')
             f.write(str(wallet))
             f.close()
-
-
