@@ -18,17 +18,17 @@ dirB = 'wal_adr/'  # Directory where to save parsing results
 fList = os.listdir(dirA)
 fList = [x for x in fList if (x.endswith('.dat') and x.startswith('blk'))]
 fList.sort()
-
+print('Время запуска программы:', time.strftime("%d.%m.%Y г. %H:%M", time.localtime()))
 try:
     for i in fList:
-        print(time.strftime("%d.%m.%Y г. %H:%M", time.localtime()))
+
         nameSrc = i
         nameRes = nameSrc.replace('.dat', '.txt')
         resList = []
         SortList = []
         a = 0
         t = dirA + nameSrc
-        print('Start ' + t)
+        #print('Start ' + t) #Инициализация запуска файла обработки БЫЛА ОТКЛЮЧЕНА
         with open(t) as file:
             for line in file:
                 c = str(line)
@@ -47,6 +47,7 @@ try:
                         exec("x{} = {}".format(i, 'str(file.readline())'))
                         i += 1
                     if (x6 == x14):
+                        print(time.strftime("%d.%m.%Y г. %H:%M", time.localtime()))
                         x0 = '00'
                         x00 = ''
                         res1 = x1 + x2 + x3 + x4 + x21 + x22 + x10 + x11 + x12 + x0 + x00 + x18 + x19 + x20 + x21 + x22 + x23 + x24
