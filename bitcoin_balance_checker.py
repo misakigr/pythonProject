@@ -57,7 +57,7 @@ try:
                     float(re.search(r'%s":(\d+),' % tag, htmltext).group(1)))
                 # print("Надо удалить проверенный адрес lists.txt")
         except:
-            # print("Error '%s'." % tag);
+            print("Error '%s'." % tag);
             # exit(1)
             pass
 
@@ -109,9 +109,8 @@ try:
     #
     #         check_balance(address)
 except:
-    print("Какая-то ошибка")
-    # exit(1)
-    pass
+    print("Oшибка bitcoin_balance_checker")
+
 if __name__ == '__main__':
     # bot.polling(none_stop=True)
     pass
