@@ -7,6 +7,7 @@ import time
 import os
 import re
 
+import Ping
 import RezkaFiles
 import SelectAdress
 import WebOpen
@@ -119,6 +120,7 @@ while True:
                             f.write(str(wallet))
                             f.close()
             os.remove(t)
+            #Ping.ping()
 
     except:
         # print(t, "Остановка число цикла j")
