@@ -10,14 +10,12 @@ import re
 import RezkaFiles
 import SelectAdress
 import WebOpen
-
+k = 0
+j = 0
+c = ''
 bb = 0
 while True:
     RezkaFiles.Rezka(bb)
-    bb += 1
-    k = 0
-    j = 0
-    c = ''
     word = 'raw-tx'
     dirA = 'res/'  # Directory where blk*.dat files are stored
     dirB = 'wal_adr/'  # Directory where to save parsing results
@@ -34,7 +32,6 @@ while True:
             nameRes = nameSrc.replace('.dat', '.txt')
             resList = []
             SortList = []
-            a = 0
             t = dirA + nameSrc
             #print('Start ' + t) #Инициализация запуска файла обработки БЫЛА ОТКЛЮЧЕНА
             with open(t) as file:
@@ -122,6 +119,9 @@ while True:
                             f.write(str(wallet))
                             f.close()
             os.remove(t)
+
     except:
-        print(j, "Остановка число цикла j")
+        # print(t, "Остановка число цикла j")
+        # os.replace(t, "D:\misak\pythonProject\StremFiles/{}.txt".format(str(time.strftime("%d_%H_%M_%S", time.localtime()))))
+
         pass
