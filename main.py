@@ -6,11 +6,11 @@
 import time
 import os
 import re
-
-import Ping
 import RezkaFiles
 import SelectAdress
 import WebOpen
+
+
 k = 0
 j = 0
 c = ''
